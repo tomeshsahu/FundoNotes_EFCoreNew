@@ -15,7 +15,7 @@ namespace BusinessLayer.Services
         {
             this.userRL = userRL;
         }
-     public void AddUser(UserPostModel userPostModel)
+        public void AddUser(UserPostModel userPostModel)
         {
             try
             {
@@ -32,6 +32,18 @@ namespace BusinessLayer.Services
             try
             {
                 return this.userRL.GetAllUsers();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string LoginUser(UserLoginModel userLoginModel)
+        {
+            try
+            {
+                return this.userRL.LoginUser(userLoginModel);
             }
             catch (Exception ex)
             {
