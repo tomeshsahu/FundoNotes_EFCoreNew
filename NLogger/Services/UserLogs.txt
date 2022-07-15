@@ -1,0 +1,1 @@
+﻿2022-07-15 19:21:31.8910|INFO|NLogger.Services.LoggerManager|User Regestration Email : deepak@gmail.com
