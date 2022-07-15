@@ -4,6 +4,7 @@ using RepositoryLayer.Interface;
 using RepositoryLayer.Services.Entity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RepositoryLayer.Services
@@ -32,6 +33,18 @@ namespace RepositoryLayer.Services
                 fundonotesContext.SaveChanges();
 
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<User> GetAllUsers()
+        {
+            try
+            {
+                return this.fundonotesContext.Users.ToList();
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interface;
 using DatabaseLayer.UserModel;
 using RepositoryLayer.Interface;
+using RepositoryLayer.Services.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,18 @@ namespace BusinessLayer.Services
             try
             {
                 this.userRL.AddUser(userPostModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<User> GetAllUsers()
+        {
+            try
+            {
+                return this.userRL.GetAllUsers();
             }
             catch (Exception ex)
             {

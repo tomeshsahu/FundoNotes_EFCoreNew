@@ -3,7 +3,9 @@ using DatabaseLayer.UserModel;
 using Microsoft.AspNetCore.Mvc;
 using NLogger.Interface;
 using RepositoryLayer.Services;
+using RepositoryLayer.Services.Entity;
 using System;
+using System.Collections.Generic;
 
 namespace FundoNotesEFCore.Controllers
 {
@@ -35,6 +37,29 @@ namespace FundoNotesEFCore.Controllers
                 throw ex;
                 }
             }
+
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+
+                List<User> getUsers = new List<User>();
+                getUsers = this.userBL.GetAllUsers();
+                if (getUsers.Count > 0)
+                {
+                    this.logger.LogInfo($"User Data Retrieved Succesfully...");
+                    return Ok(new { success = true, message = "User Data Restrieved Successfully...", data = getUsers });
+                }
+                this.logger.LogInfo($"No Users Exists at moment in DB...");
+                return BadRequest(new { sucess = false, message = "You Dont have any User at the moment in DB!!" });
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogInfo($"User Data Retrieve UnSuccesfull...");
+                throw ex;
+            }
         }
+    }
     }
 
