@@ -198,6 +198,30 @@ namespace RepositoryLayer.Services
                     throw ex;
                 }
             }
+
+        public bool ResetPassword(string email, PasswordModel modelPassword)
+        {
+        
+                try
+                {
+                    var user = this.fundonotesContext.Users.Where(x => x.Email == email).FirstOrDefault();
+                    if (user == null)
+                    {
+                        return false;
+                    }
+
+                    if (modelPassword.Password == modelPassword.ConfirmPassword)
+                    {
+                        user.Password = modelPassword.Password;
+                        this.fundonotesContext.SaveChanges();
+                    }
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
     }
-
