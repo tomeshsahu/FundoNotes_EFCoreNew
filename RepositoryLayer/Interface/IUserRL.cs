@@ -9,7 +9,8 @@ namespace RepositoryLayer.Interface
     public interface IUserRL
     {
         public void AddUser(UserPostModel userPostModel);
-        public List<User> GetAllUsers();
-        public string LoginUser(UserLoginModel userLoginModel);
+         public List<User> GetAllUsers();
+          public string LoginUser(UserLoginModel userLoginModel);
+        public bool ForgetPasswordUser(string email);
     }
 }

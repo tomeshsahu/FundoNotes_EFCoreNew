@@ -83,7 +83,28 @@ namespace FundoNotesEFCore.Controllers
             }
         }
 
-   
+        [HttpPost("ForgetPassword/{email}")]
+        public IActionResult ForgetUser(string email)
+        {
+            try
+            {
+                bool isExist = this.userBL.ForgetPasswordUser(email);
+                if (isExist)
+                {
+                    this.logger.LogInfo($"Password RestLink Sent Successfully for : {email}");
+                    return Ok(new { success = true, message = $"Password Reset Link sent successfully for : {email}" });
+                }
+                this.logger.LogInfo($"Password RestLink Sent UnSuccessfully for : {email}");
+                return BadRequest(new { success = false, message = $"No User Exist with Email : {email}" });
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError($"Something Went Wrong  : {email}");
+                throw ex;
+            }
+        }
+
+
     }
     }
 
