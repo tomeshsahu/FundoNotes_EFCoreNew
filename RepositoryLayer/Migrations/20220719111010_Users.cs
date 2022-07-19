@@ -19,7 +19,10 @@ namespace RepositoryLayer.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     IsPin = table.Column<bool>(type: "bit", nullable: false),
                     IsArchieve = table.Column<bool>(type: "bit", nullable: false),
+                    IsTrash = table.Column<bool>(type: "bit", nullable: false),
                     IsReminder = table.Column<bool>(type: "bit", nullable: false),
+                    RegisteredDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Remainder = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

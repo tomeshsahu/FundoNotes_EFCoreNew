@@ -29,14 +29,19 @@ namespace FundoNotesEFCore.Controllers
         [HttpPost("AddNote")]
         public async Task<IActionResult> AddNote(NotePostModel notePostModel)
         {
-            try {
-                var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
-                int UserId = Int32.Parse(userId.Value);
-                await this.noteBL.AddNote(UserId, notePostModel);
-                this.logger.LogInfo($"Note Created Successfully UserId = {userId}");
-                return Ok(new { success = true, Message = "Note Created Successfully...!" });
+            try
+            {
+                if (notePostModel.Title != "string" && notePostModel.Description != "string" && notePostModel.BgColor != "string")
+                {
+                    var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+                    int UserId = Int32.Parse(userId.Value);
+                    await this.noteBL.AddNote(UserId, notePostModel);
+                    this.logger.LogInfo($"Note Created Successfully UserId = {userId}");
+                    return Ok(new { success = true, Message = "Note Created Successfully...!" });
+                }
+                return this.BadRequest(new { success = false, message = "Entered Details are similar to Default one" });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -59,6 +64,38 @@ namespace FundoNotesEFCore.Controllers
                 return this.Ok(new { sucess = true, Message = "Notes Data Retrieved successfully...", data = NoteData });
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPut("UpdateNote/{NoteId}")]
+        public async Task<IActionResult> UpdateNote(int NoteId, UpdateNoteModel updateNoteModel)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+                int UserId = Int32.Parse(userId.Value);
+                var check = this.fundoContext.Notes.Where(x => x.NoteId == NoteId).FirstOrDefault();
+                if(check == null ||check.IsTrash==true) 
+                {
+                    return this.BadRequest(new { success = false, Message = "Please Provide Valid Fields for Note!!" });
+                }
+                if(updateNoteModel.Title=="" || updateNoteModel.Title== "string" && updateNoteModel.Description==""||updateNoteModel.Description=="string" && updateNoteModel.Bgcolor==" "||updateNoteModel.Bgcolor=="string" && updateNoteModel.IsTrash==true )
+                {
+                    return this.BadRequest(new { success = false, Message = "Enter Valid Data" });
+                }
+                if (updateNoteModel.Title !="" || updateNoteModel.Title != "string" && updateNoteModel.Description != " " || updateNoteModel.Description != "string" && updateNoteModel.Bgcolor != " " || updateNoteModel.Bgcolor != "string" && updateNoteModel.IsTrash == false)
+                {
+                    await this.noteBL.UpdateNote(UserId, NoteId, updateNoteModel);
+                    return this.Ok(new { success = true, Message = "Note Updated Success Fully!!" });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, Message = "Enter Valid Data" });
+                }   
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

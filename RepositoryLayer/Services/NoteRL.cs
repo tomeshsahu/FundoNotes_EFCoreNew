@@ -68,8 +68,33 @@ namespace RepositoryLayer.Services
             {
                 throw ex;
             }
+        }
 
+        public async Task UpdateNote(int userId, int noteId, UpdateNoteModel updateNoteModel)
+        {
+            try
+            {
+                var UpdateNote = fundonoteContext.Notes.FirstOrDefault(x => x.NoteId == noteId);
+                if (UpdateNote == null)
+                {
+                    throw new Exception("Note Does Not Exists!!");
+                }
+                UpdateNote.Title = updateNoteModel.Title;
+                UpdateNote.Description = updateNoteModel.Description;
+                UpdateNote.BgColor = updateNoteModel.Bgcolor;
+                UpdateNote.IsPin = updateNoteModel.IsPin;
+                UpdateNote.IsArchieve = updateNoteModel.IsArchive;
+                UpdateNote.IsReminder = updateNoteModel.IsRemainder;
+                UpdateNote.IsTrash = updateNoteModel.IsTrash;
+                UpdateNote.ModifiedDate = DateTime.Now;
+                this.fundonoteContext.Notes.UpdateRange(UpdateNote);
+                await this.fundonoteContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
-    }
+}
 

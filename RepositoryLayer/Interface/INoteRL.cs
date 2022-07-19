@@ -13,5 +13,8 @@ namespace RepositoryLayer.Interface
 
         Task <List<GetNoteModel>> GetAllNotes(int UserId);
 
+        Task UpdateNote(int userId, int noteId, UpdateNoteModel updateNoteModel);
+
+
     }
 }

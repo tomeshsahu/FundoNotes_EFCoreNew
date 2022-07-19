@@ -10,8 +10,8 @@ using RepositoryLayer.Services;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(FundooContext))]
-    [Migration("20220719051504_Users")]
-    partial class Users
+    [Migration("20220719111035_Notes")]
+    partial class Notes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,7 +43,16 @@ namespace RepositoryLayer.Migrations
                     b.Property<bool>("IsReminder")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsTrash")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RegisteredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Remainder")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")

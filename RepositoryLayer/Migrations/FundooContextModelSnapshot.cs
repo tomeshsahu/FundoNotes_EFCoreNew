@@ -41,10 +41,16 @@ namespace RepositoryLayer.Migrations
                     b.Property<bool>("IsReminder")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsTrash")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("RegisteredDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Remainder")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")

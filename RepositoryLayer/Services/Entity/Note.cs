@@ -26,11 +26,14 @@ namespace RepositoryLayer.Services.Entity
 
         public bool IsArchieve { get; set; }
 
+        public bool IsTrash { get; set; }
+
         public bool IsReminder { get; set; }
 
         public DateTime RegisteredDate { get; set; }
 
-        public DateTime ModifiedDate { get; set; }
+        public DateTime Remainder { get; set; }
 
+        public DateTime ModifiedDate { get; set; }
     }
 }
