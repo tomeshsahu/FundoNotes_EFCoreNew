@@ -17,11 +17,13 @@ namespace RepositoryLayer.Services
     {
         FundooContext fundonotesContext;
         IConfiguration iconfiguration;
+
         public UserRL(FundooContext fundonotesContext, IConfiguration iconfiguration)
         {
             this.fundonotesContext = fundonotesContext;
             this.iconfiguration = iconfiguration;
         }
+
         public void AddUser(UserPostModel userPostModel)
         {
             try
@@ -33,9 +35,8 @@ namespace RepositoryLayer.Services
                 user.Password = userPostModel.Password;
                 user.CreateDate = DateTime.Now;
                 user.ModifiedDate = DateTime.Now;
-                fundonotesContext.Users.Add(user);
-                fundonotesContext.SaveChanges();
-
+                this.fundonotesContext.Users.Add(user);
+                this.fundonotesContext.SaveChanges();
 
             }
             catch (Exception ex)
@@ -75,8 +76,8 @@ namespace RepositoryLayer.Services
             {
                 throw ex;
             }
-        
-    }
+
+        }
 
         private string GenerateJWTToken(string email, int UserId)
         {
@@ -136,7 +137,7 @@ namespace RepositoryLayer.Services
                     Message msg = messageQueue.Receive();
                     msg.Formatter = new BinaryMessageFormatter();
                     EmailService.SendEmail(email, msg.Body.ToString(), user.Firstname);
-                    messageQueue.ReceiveCompleted += new ReceiveCompletedEventHandler(msmqQueue_ReceiveCompleted);
+                    messageQueue.ReceiveCompleted += new ReceiveCompletedEventHandler(MsmqQueue_ReceiveCompleted);
 
                     messageQueue.BeginReceive();
                     messageQueue.Close();
@@ -149,7 +150,8 @@ namespace RepositoryLayer.Services
                 }
 
             }
-            private void msmqQueue_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
+
+        private void MsmqQueue_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
             {
                 try
                 {
@@ -169,7 +171,7 @@ namespace RepositoryLayer.Services
                 }
             }
 
-            private string GenerateToken(string email)
+        private string GenerateToken(string email)
             {
                 try
                 {
@@ -201,7 +203,7 @@ namespace RepositoryLayer.Services
 
         public bool ResetPassword(string email, PasswordModel modelPassword)
         {
-        
+
                 try
                 {
                     var user = this.fundonotesContext.Users.Where(x => x.Email == email).FirstOrDefault();

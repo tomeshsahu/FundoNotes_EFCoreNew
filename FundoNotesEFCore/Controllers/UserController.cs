@@ -52,7 +52,7 @@ namespace FundoNotesEFCore.Controllers
                 if (getUsers.Count > 0)
                 {
                     this.logger.LogInfo($"User Data Retrieved Succesfully...");
-                    return Ok(new { success = true, message = "User Data Restrieved Successfully...", data = getUsers });
+                    return Ok(new { success = true, message = "User Data Retrieved Successfully...", data = getUsers });
                 }
                 this.logger.LogInfo($"No Users Exists at moment in DB...");
                 return BadRequest(new { sucess = false, message = "You Dont have any User at the moment in DB!!" });

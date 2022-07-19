@@ -9,3 +9,30 @@
 2022-07-16 00:44:08.5796|INFO|NLogger.Services.LoggerManager|Password RestLink Sent Successfully for : govind@gmail.com
 2022-07-16 00:45:03.9174|INFO|NLogger.Services.LoggerManager|Password Reset Successfully for : govind@gmail.com
 2022-07-16 00:45:25.6039|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-16 09:20:06.5082|INFO|NLogger.Services.LoggerManager|User Regestration Email : vinay@gmail.com
+2022-07-16 09:21:59.0793|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-16 09:24:22.1724|INFO|NLogger.Services.LoggerManager|User Login Successfull : vinay@gmail.com
+2022-07-16 09:26:24.3193|ERROR|NLogger.Services.LoggerManager|Something Went Wrong  : vinay@gmail.com
+2022-07-18 11:13:15.8894|INFO|NLogger.Services.LoggerManager|User Regestration Email : yBLtZa0IGBcLXXBw3.vZZzgLM.erjRmBuv.S.sMA7syv.dMvxTdEZG.u0v3p.GrxEkjNo.1xI.iU2Tn.eLHRy.c.OqTG25pFx.sAmkzP55Y.RcqNxcTF.yj3dwXX.MRD.54ci.qbdwI.BHnzUauvJZ.ClcQAUZC.Ic1n4sS.sHkf5bEz.r32sMd0bWS.0.YJlK3o1.f.nTbgeg.1erv.506d.Pta5.PK8nT2v.44k7FjDd7h.l0Q.D.qZe.VwNfRoeCL.U2N.UZfY8.Vnyo8fZ9Ay.86.mn2x.kpdl.JC2EPQC0.kB2K2.rBpk.WNc1U8.uXFM.dKvQ7g6yoG.jreji.TjFTN59nw.cWJbgCT.o.m6ncBC.N0yTfz7.geC.sxd.4YVi2g4TW.O.ZjH0pdG6.mkWaJjml.L7x0JcsEX.rG9RBz.GyXzrC.e9lsTZ.StXbRk5ELf.W.v6ucID.J.fmUyB9rSQG.N3hEMN.Bw.8lkUgaW.9@fhA@Orvm@HG@zY@ENsx@xKoc@uv@jKKKF@YtYkv@Ewve@VH@TrB@LRuE@YgIpA@BJAq@Sn@EaATB@UnFN@HFJ@EXW@cqBV@wkoVM@DAA@BVQ@ze@kMi@Xgs@BWzs@yoYI@OzY@eSUA@uHX@jzpsY@SQrwG@sOASX@wr@FVjnq@KSI@hiTr@znSy@oq@IF@jchew@TBW@FGY@fNOw@EA@RAxG.eU.YP
+2022-07-18 11:13:55.7613|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-19 01:36:18.9350|INFO|NLogger.Services.LoggerManager|User Data Retrieve UnSuccesfull...
+2022-07-19 01:41:33.1619|INFO|NLogger.Services.LoggerManager|User Regestration Email : tomesh1@gmail.com
+2022-07-19 02:37:33.8185|INFO|NLogger.Services.LoggerManager|User Regestration Email : tomesh@gmail.com
+2022-07-19 02:47:31.8697|INFO|NLogger.Services.LoggerManager|User Regestration Email : suresh@gmail.com
+2022-07-19 02:47:48.9380|ERROR|NLogger.Services.LoggerManager|User Regestration Fail: suresh@gmail.com
+2022-07-19 09:43:10.5030|INFO|NLogger.Services.LoggerManager|User Data Retrieve UnSuccesfull...
+2022-07-19 09:57:41.9446|INFO|NLogger.Services.LoggerManager|User Data Retrieve UnSuccesfull...
+2022-07-19 10:17:18.6604|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-19 10:18:25.5444|INFO|NLogger.Services.LoggerManager|User Regestration Email : vivek@gmail.com
+2022-07-19 10:18:34.8389|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-19 10:19:27.9918|INFO|NLogger.Services.LoggerManager|User Login Successfull : vivek@gmail.com
+2022-07-19 10:56:35.3139|INFO|NLogger.Services.LoggerManager|User Regestration Email : tomesh@gmail.com
+2022-07-19 10:56:48.5049|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-19 10:57:11.7980|INFO|NLogger.Services.LoggerManager|User Login Successfull : tomesh@gmail.com
+2022-07-19 10:58:01.7181|INFO|NLogger.Services.LoggerManager|Note Created Successfully UserId = UserId: 1
+2022-07-19 10:58:18.4804|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-19 11:02:04.4054|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-19 11:10:50.3243|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-19 11:12:04.8265|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-19 11:16:47.9134|INFO|NLogger.Services.LoggerManager|User Login Successfull : tomesh@gmail.com
+2022-07-19 11:17:24.9083|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
