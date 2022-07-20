@@ -20,6 +20,8 @@ namespace RepositoryLayer.Interface
         Task ArchiveNote(int userId, int noteId);
         Task PinNote(int UserId, int NoteId);
 
+        Task TrashNote(int userId, int noteId);
+
 
     }
 }

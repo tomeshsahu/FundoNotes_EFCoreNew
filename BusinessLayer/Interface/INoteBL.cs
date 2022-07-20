@@ -15,7 +15,7 @@ namespace BusinessLayer.Interface
         Task DeleteNote(int userId, int noteId);
         Task ArchiveNote(int userId, int noteId);
         Task PinNote(int UserId, int NoteId);
-
+        Task TrashNote(int userId, int noteId);
 
 
     }

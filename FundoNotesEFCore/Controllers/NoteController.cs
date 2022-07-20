@@ -164,6 +164,29 @@ namespace FundoNotesEFCore.Controllers
             }
         }
 
+        [HttpPut("TrashNote")]
+        public async Task<IActionResult> TrashNote(int noteId)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+                int UserId = int.Parse(userId.Value);
+                var updateNote = fundoContext.Notes.FirstOrDefault(x => x.NoteId == noteId);
+                if (updateNote == null || updateNote.IsTrash == true)
+                {
+                    this.logger.LogError($"Note Does Not Exists!! {noteId}|UserId = {userId}");
+                    return this.BadRequest(new { success = false, Message = "Note Does not Exists!!" });
+                }
+                await this.noteBL.PinNote(UserId, noteId);
+                this.logger.LogInfo($"Note PinNote Successfully NoteId={noteId}|UserId = {userId}");
+                return this.Ok(new { sucess = true, Message = $"NoteId {noteId} Trashed Successfully..." });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

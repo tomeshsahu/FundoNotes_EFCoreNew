@@ -157,6 +157,30 @@ namespace RepositoryLayer.Services
                 throw ex;
             }
         }
+
+        public async Task TrashNote(int userId, int noteId)
+        {
+            try
+            {
+                var Trash = fundonoteContext.Notes.FirstOrDefault(x => x.NoteId == noteId);
+                if(Trash!=null)
+                {
+                    if(Trash.IsTrash==false)
+                    {
+                        Trash.IsTrash = true;
+                    }
+                    else
+                    {
+                        Trash.IsTrash = false;
+                    }
+                }
+                await this.fundonoteContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 
