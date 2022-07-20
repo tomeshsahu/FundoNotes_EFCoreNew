@@ -49,5 +49,39 @@ namespace BusinessLayer.Services
                 throw ex;
             }
         }
+        public async Task DeleteNote(int userId, int noteId)
+        {
+            try { 
+                   await this.noteRL.DeleteNote(userId, noteId);
+                }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task ArchiveNote(int userId, int noteId)
+        {
+            try
+            {
+                await this.noteRL.ArchiveNote(userId, noteId);  
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task PinNote(int UserId, int NoteId)
+        {
+            try
+            {
+                await this.noteRL.PinNote(UserId, NoteId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -75,7 +75,7 @@ namespace RepositoryLayer.Services
             try
             {
                 var UpdateNote = fundonoteContext.Notes.FirstOrDefault(x => x.NoteId == noteId);
-                if (UpdateNote == null)
+                if (UpdateNote == null||UpdateNote.IsTrash==true)
                 {
                     throw new Exception("Note Does Not Exists!!");
                 }
@@ -91,6 +91,68 @@ namespace RepositoryLayer.Services
                 await this.fundonoteContext.SaveChangesAsync();
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task DeleteNote(int userId, int noteId)
+        {
+            try
+            {
+                    var DeleteNote = fundonoteContext.Notes.FirstOrDefault(x => x.NoteId == noteId);
+                    DeleteNote.IsTrash = true;
+                    await this.fundonoteContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task ArchiveNote(int userId, int noteId)
+        {
+            try
+            {
+                var note = this.fundonoteContext.Notes.Where(x => x.UserId == userId && x.NoteId == noteId).FirstOrDefault();
+                if (note != null && note.IsTrash == false)
+                {
+                    if (note.IsPin == false)
+                    {
+                        note.IsPin = true;
+                    }
+                    else
+                    {
+                        note.IsPin = false;
+                    }
+                }
+                await this.fundonoteContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task PinNote(int UserId, int NoteId)
+        {
+            try
+            {
+                var NotePin = fundonoteContext.Notes.FirstOrDefault(x => x.NoteId == NoteId);
+                if(NotePin!=null &&  NotePin.IsTrash==false)
+                {
+                    if(NotePin.IsPin==false)
+                    {
+                        NotePin.IsPin = true;
+                    }
+                    else
+                    {
+                        NotePin.IsPin = false;
+                    }
+                }
+                await this.fundonoteContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

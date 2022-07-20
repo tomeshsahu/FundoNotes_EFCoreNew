@@ -58,3 +58,29 @@
 2022-07-19 23:23:32.2750|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
 2022-07-19 23:24:11.4636|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
 2022-07-19 23:40:56.6240|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 00:21:03.5736|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 00:32:07.3003|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 00:38:11.5564|INFO|NLogger.Services.LoggerManager|Note Created Successfully UserId = UserId: 1
+2022-07-20 00:38:21.1067|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 00:40:35.1181|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 01:07:48.1143|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 01:08:30.0998|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 02:48:00.2677|ERROR|NLogger.Services.LoggerManager|Login Unsuccessfull : suresh@gmail.com
+2022-07-20 02:48:17.1761|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-20 02:49:26.7061|INFO|NLogger.Services.LoggerManager|User Login Successfull : suresh@gmail.com
+2022-07-20 02:49:51.8718|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 1|UserId = UserId: 1
+2022-07-20 02:50:00.4128|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 2|UserId = UserId: 1
+2022-07-20 02:50:09.6254|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 02:50:38.7336|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 2|UserId = UserId: 1
+2022-07-20 02:50:49.0392|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-20 10:12:12.3451|INFO|NLogger.Services.LoggerManager|User Regestration Email : mohan@gmail.com
+2022-07-20 10:12:24.3924|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-20 10:12:49.5041|INFO|NLogger.Services.LoggerManager|User Login Successfull : mohan@gmail.com
+2022-07-20 10:13:39.0745|INFO|NLogger.Services.LoggerManager|Note Created Successfully UserId = UserId: 2
+2022-07-20 10:13:49.3411|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 2
+2022-07-20 10:15:40.1596|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 1|UserId = UserId: 2
+2022-07-20 10:16:07.4672|INFO|NLogger.Services.LoggerManager|Note Created Successfully UserId = UserId: 2
+2022-07-20 10:16:13.9684|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 2
+2022-07-20 10:18:34.6155|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 4|UserId = UserId: 2
+2022-07-20 10:18:41.9339|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 3|UserId = UserId: 2
+2022-07-20 10:18:55.2524|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 2

@@ -12,6 +12,10 @@ namespace BusinessLayer.Interface
         public Task<List<GetNoteModel>> GetAllNotes(int UserId);
 
         Task UpdateNote(int userId, int noteId, UpdateNoteModel updateNoteModel);
+        Task DeleteNote(int userId, int noteId);
+        Task ArchiveNote(int userId, int noteId);
+        Task PinNote(int UserId, int NoteId);
+
 
 
     }
