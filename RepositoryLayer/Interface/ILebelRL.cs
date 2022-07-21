@@ -12,9 +12,9 @@ namespace RepositoryLayer.Interface
 
         Task<List<LebelResponseModel>> GetAllLabels(int userId);
 
-        Task<bool> UpdateLebel(int UserId, int NoteId, string LebelName);
+        Task<bool> UpdateLebel(int UserId, int NoteId, int LebelId, string LebelName);
 
-        Task<bool> DeleteLebel(int UserId, int NoteId);
+        Task<bool> DeleteLebel(int UserId, int NoteId,int LebelId);
 
         Task<List<LebelResponseModel>>GetLebelByNoteId (int UserId, int NoteId);
 

@@ -40,13 +40,13 @@ namespace FundoNotesEFCore.Controllers
         }
 
         [HttpDelete("Deletelebel")]
-        public async Task<IActionResult> Deletelebel(int NoteId)
+        public async Task<IActionResult> Deletelebel(int NoteId,int LebelId)
         {
             try
             {
                 var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
                 int UserId = Int32.Parse(userId.Value);
-                await this.lebelBL.Deletelebel(UserId, NoteId);
+                await this.lebelBL.Deletelebel(UserId, NoteId, LebelId);
                 return Ok(new {succss=true,Message="Lebel Delete Successfully"});
             }
             catch(Exception ex)
@@ -63,12 +63,22 @@ namespace FundoNotesEFCore.Controllers
                 var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
                 int UserId = Int32.Parse(userId.Value);
                 var result = await this.lebelBL.GetAllLabels(UserId);
-                return this.Ok(new { sucess = true, Message = "Fetch all labels", data = result });
+                return this.Ok(new { success = true, Message = "Fetch all labels", data = result });
             }
             catch(Exception ex)
             {
                 throw ex;
             }
+        }
+
+        [HttpPut("UpdateLebel")]
+        public async Task<IActionResult> UpdateLebel(int NoteId,int LebelId, string LebelName)
+        {
+            var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+            int UserId = Int32.Parse(userId.Value);
+               this.lebelBL.UpdateLebel(UserId,NoteId,LebelId, LebelName);
+            return this.Ok(new { success = true, Message = " Lebel updated Succssfully...!" });
+
         }
     }
 }

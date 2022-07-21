@@ -42,11 +42,11 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public async Task<bool> DeleteLebel(int UserId, int NoteId)
+        public async Task<bool> DeleteLebel(int UserId, int NoteId,int Lebelid)
         {
             try
             {
-                var result = this.fundooContext.Labels.Where(x => x.NoteId == NoteId && x.UserId == UserId).FirstOrDefault();
+                var result = this.fundooContext.Labels.Where(x => x.NoteId == NoteId && x.UserId == UserId && x.LabelId==Lebelid).FirstOrDefault();
                 if(result==null)
                 {
                     return false;
@@ -96,9 +96,23 @@ namespace RepositoryLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateLebel(int UserId, int NoteId, string LebelName)
+        public async Task<bool> UpdateLebel(int UserId, int NoteId, int LebelId, string LebelName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var update = fundooContext.Labels.Where(x => x.NoteId == NoteId && x.UserId == UserId &&x.LabelId==LebelId ).FirstOrDefault();
+                if(update==null)
+                {
+                    return false;
+                }
+                update.LabelName=LebelName;
+                this.fundooContext.SaveChanges();
+                return true;
+            }
+            catch(Exception Ex)
+            {
+                throw Ex;
+            }
         }
     }
 }

@@ -10,7 +10,8 @@ namespace BusinessLayer.Interface
     {
         Task AddLebel(int UserId, int NoteId, string LebelName);
 
-        Task<bool>Deletelebel(int UserId, int NoteId);
+        Task<bool>Deletelebel(int UserId, int NoteId, int LebelId);
         Task<List<LebelResponseModel>> GetAllLabels(int userId);
+        Task<bool> UpdateLebel(int UserId, int NoteId,int LebelId, string LebelName);
     }
 }

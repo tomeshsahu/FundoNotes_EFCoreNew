@@ -27,11 +27,11 @@ namespace BusinessLayer.Services
             }
         }
 
-        public async Task<bool> Deletelebel(int UserId, int NoteId)
+        public async Task<bool> Deletelebel(int UserId, int NoteId, int LebelId)
         {
             try
             {
-               return await this.lebelRL.DeleteLebel(UserId, NoteId);
+               return await this.lebelRL.DeleteLebel(UserId, NoteId,LebelId);
             }
             catch(Exception ex)
             {
@@ -44,6 +44,18 @@ namespace BusinessLayer.Services
             try
             {
                 return this.lebelRL.GetAllLabels(userId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> UpdateLebel(int UserId, int NoteId, int LebelId, string LebelName)
+        {
+            try
+            {
+               return await this.lebelRL.UpdateLebel(UserId, NoteId, LebelId, LebelName);
             }
             catch(Exception ex)
             {
