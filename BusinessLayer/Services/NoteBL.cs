@@ -95,5 +95,17 @@ namespace BusinessLayer.Services
                 throw ex;
             }
         }
+
+        public async Task<string> ReminderNote(int userId, int noteId, DateTime Reminder)
+        {
+            try
+            {
+                return await this.noteRL.ReminderNote(userId, noteId, Reminder);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

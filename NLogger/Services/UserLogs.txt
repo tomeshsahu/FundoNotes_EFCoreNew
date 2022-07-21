@@ -84,3 +84,15 @@
 2022-07-20 10:18:34.6155|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 4|UserId = UserId: 2
 2022-07-20 10:18:41.9339|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 3|UserId = UserId: 2
 2022-07-20 10:18:55.2524|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 2
+2022-07-20 11:14:50.8801|INFO|NLogger.Services.LoggerManager|User Login Successfull : mohan@gmail.com
+2022-07-20 11:15:13.0738|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 2
+2022-07-20 11:21:44.2948|ERROR|NLogger.Services.LoggerManager|Note Does Not Exists!! 3|UserId = UserId: 2
+2022-07-21 14:23:30.2117|INFO|NLogger.Services.LoggerManager|User Regestration Email : tomesh@gmail.com
+2022-07-21 14:23:41.2493|INFO|NLogger.Services.LoggerManager|User Data Retrieved Succesfully...
+2022-07-21 14:24:13.4025|INFO|NLogger.Services.LoggerManager|User Login Successfull : tomesh@gmail.com
+2022-07-21 14:25:09.7809|INFO|NLogger.Services.LoggerManager|Note Created Successfully UserId = UserId: 1
+2022-07-21 14:25:16.6323|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-21 14:25:42.4850|INFO|NLogger.Services.LoggerManager|Note Created Successfully UserId = UserId: 1
+2022-07-21 14:25:48.3505|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1
+2022-07-21 16:56:12.9905|INFO|NLogger.Services.LoggerManager|User Login Successfull : tomesh@gmail.com
+2022-07-21 16:56:39.8969|INFO|NLogger.Services.LoggerManager|All Notes Retrieved Successfully UserId = UserId: 1

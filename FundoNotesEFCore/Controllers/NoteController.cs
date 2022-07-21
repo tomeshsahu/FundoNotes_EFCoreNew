@@ -13,7 +13,7 @@ namespace FundoNotesEFCore.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class NoteController : Controller
+    public class NoteController : ControllerBase
     {
         private readonly ILoggerManager logger;
         private readonly FundooContext fundoContext;
@@ -77,19 +77,15 @@ namespace FundoNotesEFCore.Controllers
                     return this.BadRequest(new { sucess = false, Message = $"No Note Found for NodeId : {NoteId}" });
                 }
 
-                if ((updateNoteModel.Title == string.Empty) || (updateNoteModel.Title == "string" && updateNoteModel.Description == "string" && updateNoteModel.Bgcolor == "string") && (updateNoteModel.IsTrash == true))
+                if ((updateNoteModel.Title == "") || (updateNoteModel.Title == "string" && updateNoteModel.Description == "string" && updateNoteModel.Bgcolor == "string") )
                 {
                     return this.BadRequest(new { sucess = false, Message = "Enter Valid Data" });
                 }
-                if ((updateNoteModel.Title != "") || (updateNoteModel.Title != "string") && (updateNoteModel.Description != "") || (updateNoteModel.Description != "string") && (updateNoteModel.Bgcolor != "string") || (updateNoteModel.Bgcolor != "") && (updateNoteModel.IsTrash == true))
-                {
+               
                     await this.noteBL.UpdateNote(UserId, NoteId, updateNoteModel);
                     return this.Ok(new { sucess = true, Message = "Note Updated Success Fully!!" });
-                }
-                else
-                {
-                    return this.BadRequest(new { sucess = false, Message = $"Invalid : {NoteId}" });
-                }
+                
+
             }
             catch (Exception ex)
             {
@@ -180,6 +176,34 @@ namespace FundoNotesEFCore.Controllers
                 await this.noteBL.PinNote(UserId, noteId);
                 this.logger.LogInfo($"Note PinNote Successfully NoteId={noteId}|UserId = {userId}");
                 return this.Ok(new { sucess = true, Message = $"NoteId {noteId} Trashed Successfully..." });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPut("ReminderNote/{NoteId}")]
+
+        public async Task<IActionResult> ReminderNote(int NoteId, RemainderNoteModel reminderNoteModel)
+        {
+            try
+            {
+                var currentUser = HttpContext.User;
+                int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+                var reminder = Convert.ToDateTime(reminderNoteModel.Reminder);
+                var result = await this.noteBL.ReminderNote(userId, NoteId, reminder);
+
+                if (result != null)
+                {
+                    this.logger.LogInfo($"Note Reminder Set Successfully  NoteId={NoteId}|UserId = {userId}");
+                    return this.Ok(new { status = 200, success = true, message = result });
+                }
+                else
+                {
+                    this.logger.LogError($"Note Reminder Set UnSuccessfull!! {NoteId}|UserId = {userId}");
+                    return this.BadRequest(new { success = false, Message = $"NoteId {NoteId} Reminder set Failed!!" });
+                }
             }
             catch (Exception ex)
             {

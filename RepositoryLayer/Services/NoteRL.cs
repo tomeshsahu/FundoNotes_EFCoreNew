@@ -37,7 +37,7 @@ namespace RepositoryLayer.Services
                 await this.fundonoteContext.SaveChangesAsync();
             }
             catch (Exception ex)
-            {
+            {   
                 throw ex;
             }
         }
@@ -48,7 +48,7 @@ namespace RepositoryLayer.Services
             {
                 return await fundonoteContext.Users
                .Where(u => u.UserId == UserId)
-               .Join(fundonoteContext.Notes,
+               .Join(fundonoteContext.Notes.Where(r=>r.IsTrash==false),
                u => u.UserId,
                n => n.UserId,
                (u, n) => new GetNoteModel
@@ -175,6 +175,31 @@ namespace RepositoryLayer.Services
                     }
                 }
                 await this.fundonoteContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<string> ReminderNote(int userId, int noteId, DateTime Reminder)
+        {
+            try
+            {
+                var ReminderNoteResult = fundonoteContext.Notes.Where(x => x.NoteId == noteId && x.UserId == userId).FirstOrDefault();
+                if(ReminderNoteResult!=null && ReminderNoteResult.IsReminder==false)
+                {
+                    ReminderNoteResult.IsReminder = true;
+                    ReminderNoteResult.Remainder =Reminder;
+                    await this.fundonoteContext.SaveChangesAsync();
+                    return "Reminder Set Successfull for Date:" + Reminder.Date + " And Time" + Reminder.TimeOfDay;
+                }
+                else
+                {
+                    ReminderNoteResult.IsReminder = false;
+                    await this.fundonoteContext.SaveChangesAsync();
+                    return null;
+                }
             }
             catch(Exception ex)
             {

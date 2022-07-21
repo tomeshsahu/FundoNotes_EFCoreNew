@@ -2,7 +2,7 @@
 
 namespace RepositoryLayer.Migrations
 {
-    public partial class Notes : Migration
+    public partial class Lebel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

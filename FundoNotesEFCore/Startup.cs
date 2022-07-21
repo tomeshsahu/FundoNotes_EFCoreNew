@@ -86,6 +86,8 @@ namespace FundoNotesEFCore
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<INoteRL, NoteRL>();
             services.AddTransient<INoteBL, NoteBL>();
+            services.AddTransient<ILebelRL, LebelRL>();
+            services.AddTransient<ILebelBL, LebelBL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

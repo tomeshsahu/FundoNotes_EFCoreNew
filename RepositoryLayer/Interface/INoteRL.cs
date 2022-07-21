@@ -22,6 +22,8 @@ namespace RepositoryLayer.Interface
 
         Task TrashNote(int userId, int noteId);
 
+        Task<string> ReminderNote(int userId, int noteId, DateTime Reminder);
+
 
     }
 }
