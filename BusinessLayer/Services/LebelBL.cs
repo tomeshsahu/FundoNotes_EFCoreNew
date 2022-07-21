@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Interface;
+using DatabaseLayer.LebelModel;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,18 @@ namespace BusinessLayer.Services
             try
             {
                return await this.lebelRL.DeleteLebel(UserId, NoteId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Task<List<LebelResponseModel>> GetAllLabels(int userId)
+        {
+            try
+            {
+                return this.lebelRL.GetAllLabels(userId);
             }
             catch(Exception ex)
             {

@@ -10,7 +10,7 @@ namespace RepositoryLayer.Interface
     {
         Task AddLebel(int UserId, int NoteId, string LebelName);
 
-        Task<List<LebelResponseModel>> GetAllLebel(int userId);
+        Task<List<LebelResponseModel>> GetAllLabels(int userId);
 
         Task<bool> UpdateLebel(int UserId, int NoteId, string LebelName);
 

@@ -1,5 +1,6 @@
 ﻿using DatabaseLayer.LebelModel;
 using Microsoft.Data.SqlClient.DataClassification;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Interface;
 using RepositoryLayer.Services.Entity;
@@ -60,9 +61,34 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public Task<List<LebelResponseModel>> GetAllLebel(int userId)
+        public async Task<List<LebelResponseModel>> GetAllLabels(int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var label=this.fundooContext.Labels.FirstOrDefault(x=>x.UserId== userId);
+                var result = await (from users in fundooContext.Users
+                                    join notes in fundooContext.Notes on users.UserId equals userId
+                                    join labels in fundooContext.Labels on notes.NoteId equals labels.NoteId
+                                    where labels.UserId == userId
+                                    select new LebelResponseModel
+                                    {
+                                        LebelId = labels.LabelId,
+                                        LebelName=labels.LabelName,
+                                        UserId=userId,
+                                        NodeId=notes.NoteId,
+                                        Title=notes.Title,
+                                        Description=notes.Description,
+                                        FirstName=users.Firstname,
+                                        LastName=users.Lastname,
+                                        Email=users.Email,
+                                    }).ToListAsync();
+                return result;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<List<LebelResponseModel>> GetLebelByNoteId(int UserId, int NoteId)

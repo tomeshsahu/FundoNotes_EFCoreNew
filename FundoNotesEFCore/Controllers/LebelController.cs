@@ -54,5 +54,21 @@ namespace FundoNotesEFCore.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet("GetAlllebel")]
+        public async Task<IActionResult> GetAllLabels()
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+                int UserId = Int32.Parse(userId.Value);
+                var result = await this.lebelBL.GetAllLabels(UserId);
+                return this.Ok(new { sucess = true, Message = "Fetch all labels", data = result });
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
