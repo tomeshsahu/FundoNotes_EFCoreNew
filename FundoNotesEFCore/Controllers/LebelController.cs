@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Interface;
+using DatabaseLayer.LebelModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLogger.Interface;
 using RepositoryLayer.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,11 +76,34 @@ namespace FundoNotesEFCore.Controllers
         [HttpPut("UpdateLebel")]
         public async Task<IActionResult> UpdateLebel(int NoteId,int LebelId, string LebelName)
         {
-            var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
-            int UserId = Int32.Parse(userId.Value);
-               this.lebelBL.UpdateLebel(UserId,NoteId,LebelId, LebelName);
-            return this.Ok(new { success = true, Message = " Lebel updated Succssfully...!" });
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+                int UserId = Int32.Parse(userId.Value);
+                this.lebelBL.UpdateLebel(UserId, NoteId, LebelId, LebelName);
+                return this.Ok(new { success = true, Message = " Lebel updated Succssfully...!" });
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
+        [HttpGet("GetLabelByNoteid")]
+        public async Task<List<LebelResponseModel>> GetLebelByNoteId(int NoteId)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
+                int UserId = Int32.Parse(userId.Value);
+                var NoteData = await this.lebelBL.GetLebelByNoteId(UserId, NoteId);
+                return NoteData;
+              
+            }
+            catch(Exception Ex)
+            {
+                throw Ex;
+            }
         }
     }
 }

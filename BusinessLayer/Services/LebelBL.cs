@@ -51,6 +51,19 @@ namespace BusinessLayer.Services
             }
         }
 
+        public  Task<List<LebelResponseModel>> GetLebelByNoteId(int userId, int noteId)
+        {
+            try
+            {
+              return this.lebelRL.GetLebelByNoteId(userId, noteId);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public async Task<bool> UpdateLebel(int UserId, int NoteId, int LebelId, string LebelName)
         {
             try

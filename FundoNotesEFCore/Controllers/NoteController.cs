@@ -2,10 +2,16 @@
 using DatabaseLayer.NoteModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using NLogger.Interface;
 using RepositoryLayer.Services;
+using RepositoryLayer.Services.Entity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FundoNotesEFCore.Controllers
@@ -18,12 +24,16 @@ namespace FundoNotesEFCore.Controllers
         private readonly ILoggerManager logger;
         private readonly FundooContext fundoContext;
         private readonly INoteBL noteBL;
+        private readonly IDistributedCache distributedCache;
+        private readonly IMemoryCache memoryCache;
 
-        public NoteController(FundooContext fundoContext,INoteBL noteBL,ILoggerManager logger)
+        public NoteController(FundooContext fundoContext,INoteBL noteBL,ILoggerManager logger, IDistributedCache distributedCache, IMemoryCache memoryCache)
         {
             this.logger = logger;
             this.fundoContext = fundoContext;
             this.noteBL = noteBL;
+            this.memoryCache = memoryCache;
+            this.distributedCache = distributedCache;
         }
 
         [HttpPost("AddNote")]
@@ -47,16 +57,17 @@ namespace FundoNotesEFCore.Controllers
         {
             try
             {
+                List<GetNoteModel> note = new List<GetNoteModel>();
                 var userId = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("UserId", StringComparison.InvariantCultureIgnoreCase));
                 int UserId = Int32.Parse(userId.Value);
-                var NoteData = await this.noteBL.GetAllNotes(UserId);
-                if (NoteData == null)
+                note = await this.noteBL.GetAllNotes(UserId);
+                if (note == null)
                 {
                     this.logger.LogInfo($"No notes Exist At Moment!! UserId={UserId}");
                     return this.BadRequest(new { success = false, Message = "You Don't Have Notes...!" });
                 }
                 this.logger.LogInfo($"All Notes Retrieved Successfully UserId = {userId}");
-                return this.Ok(new { sucess = true, Message = "Notes Data Retrieved successfully...", data = NoteData });
+                return this.Ok(new { sucess = true, Message = "Notes Data Retrieved successfully...", data = note });
             }
             catch(Exception ex)
             {
@@ -212,5 +223,36 @@ namespace FundoNotesEFCore.Controllers
         }
 
 
+        [HttpGet("GetAllNoteUsingRedis")]
+        public async Task<IActionResult> GetAllNoteUsingRedis()
+        {
+            try
+            {
+                var CacheKey = "NoteList";
+                string SerializeNoteList;
+                var notelist = new List<GetNoteModel>();
+                var redisnotelist = await distributedCache.GetAsync(CacheKey);
+                if (redisnotelist != null)
+                {
+                    SerializeNoteList = Encoding.UTF8.GetString(redisnotelist);
+                    notelist = JsonConvert.DeserializeObject<List<GetNoteModel>>(SerializeNoteList);
+                }
+                else
+                {
+                    var userid = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("userId", StringComparison.InvariantCultureIgnoreCase));
+                    int userId = Int32.Parse(userid.Value);
+                    notelist = await this.noteBL.GetAllNotes(userId);
+                    SerializeNoteList = JsonConvert.SerializeObject(notelist);
+                    redisnotelist = Encoding.UTF8.GetBytes(SerializeNoteList);
+                    var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(20)).SetAbsoluteExpiration(TimeSpan.FromHours(6));
+                    await distributedCache.SetAsync(CacheKey, redisnotelist, option);
+                }
+                return this.Ok(new { success = true, message = $"Get Note Successful", data = notelist });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

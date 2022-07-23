@@ -18,20 +18,20 @@ namespace RepositoryLayer.Services
         FundooContext fundooContext;
         IConfiguration iconfiguration;
 
-        public LebelRL(FundooContext fundooContext,IConfiguration iconfiguration)
+        public LebelRL(FundooContext fundooContext, IConfiguration iconfiguration)
         {
-            this.fundooContext=fundooContext;
-            this.iconfiguration=iconfiguration;
+            this.fundooContext = fundooContext;
+            this.iconfiguration = iconfiguration;
         }
 
         public async Task AddLebel(int UserId, int NoteId, string LebelName)
         {
             try
             {
-                Label lebel=new Label();
+                Label lebel = new Label();
                 lebel.UserId = UserId;
-                lebel.NoteId= NoteId;
-                lebel.LabelName= LebelName;
+                lebel.NoteId = NoteId;
+                lebel.LabelName = LebelName;
 
                 this.fundooContext.Labels.Add(lebel);
                 await this.fundooContext.SaveChangesAsync();
@@ -42,12 +42,12 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public async Task<bool> DeleteLebel(int UserId, int NoteId,int Lebelid)
+        public async Task<bool> DeleteLebel(int UserId, int NoteId, int Lebelid)
         {
             try
             {
-                var result = this.fundooContext.Labels.Where(x => x.NoteId == NoteId && x.UserId == UserId && x.LabelId==Lebelid).FirstOrDefault();
-                if(result==null)
+                var result = this.fundooContext.Labels.Where(x => x.NoteId == NoteId && x.UserId == UserId && x.LabelId == Lebelid).FirstOrDefault();
+                if (result == null)
                 {
                     return false;
                 }
@@ -55,7 +55,7 @@ namespace RepositoryLayer.Services
                 this.fundooContext.SaveChangesAsync();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -64,8 +64,9 @@ namespace RepositoryLayer.Services
         public async Task<List<LebelResponseModel>> GetAllLabels(int userId)
         {
             try
-            {
-                var label=this.fundooContext.Labels.FirstOrDefault(x=>x.UserId== userId);
+            { 
+                var label = this.fundooContext.Labels.FirstOrDefault(x => x.UserId == userId);
+                //join query
                 var result = await (from users in fundooContext.Users
                                     join notes in fundooContext.Notes on users.UserId equals userId
                                     join labels in fundooContext.Labels on notes.NoteId equals labels.NoteId
@@ -73,30 +74,59 @@ namespace RepositoryLayer.Services
                                     select new LebelResponseModel
                                     {
                                         LebelId = labels.LabelId,
-                                        LebelName=labels.LabelName,
-                                        UserId=userId,
-                                        NodeId=notes.NoteId,
-                                        Title=notes.Title,
-                                        Description=notes.Description,
-                                        FirstName=users.Firstname,
-                                        LastName=users.Lastname,
-                                        Email=users.Email,
+                                        LebelName = labels.LabelName,
+                                        UserId = userId,
+                                        NodeId = notes.NoteId,
+                                        Title = notes.Title,
+                                        Description = notes.Description,
+                                        FirstName = users.Firstname,
+                                        LastName = users.Lastname,
+                                        Email = users.Email,
                                     }).ToListAsync();
                 return result;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-        public Task<List<LebelResponseModel>> GetLebelByNoteId(int UserId, int NoteId)
-        {
-            throw new NotImplementedException();
+        public async Task<List<LebelResponseModel>> GetLebelByNoteId(int UserId, int NoteId)
+
+        { 
+         try{
+
+            var label = this.fundooContext.Labels.FirstOrDefault(x => x.UserId == UserId);
+            var result = await(from user in fundooContext.Users
+                               join notes in fundooContext.Notes on user.UserId equals UserId //where notes.NoteId == NoteId
+                               join labels in fundooContext.Labels on notes.NoteId equals labels.NoteId
+                               where labels.NoteId == NoteId
+                               select new LebelResponseModel
+                               {
+                                   LebelId = labels.LabelId,
+                                   UserId = UserId,
+                                   NodeId = notes.NoteId,
+                                   Title = notes.Title,
+                                   FirstName = user.Firstname,
+                                   LastName = user.Lastname,
+                                   Email = user.Email,
+                                   Description = notes.Description,
+                                   LebelName = labels.LabelName,
+                               }).ToListAsync();
+            return result;
         }
 
-        public async Task<bool> UpdateLebel(int UserId, int NoteId, int LebelId, string LebelName)
+        catch(Exception ex)
+            {
+
+                throw ex;
+            }
+             }
+
+
+
+    public async Task<bool> UpdateLebel(int UserId, int NoteId, int LebelId, string LebelName)
         {
             try
             {

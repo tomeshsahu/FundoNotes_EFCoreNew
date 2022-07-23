@@ -13,5 +13,7 @@ namespace BusinessLayer.Interface
         Task<bool>Deletelebel(int UserId, int NoteId, int LebelId);
         Task<List<LebelResponseModel>> GetAllLabels(int userId);
         Task<bool> UpdateLebel(int UserId, int NoteId,int LebelId, string LebelName);
+        Task<List<LebelResponseModel>> GetLebelByNoteId(int UserId, int NoteId);
+    
     }
 }

@@ -117,13 +117,13 @@ namespace RepositoryLayer.Services
                 var note = this.fundonoteContext.Notes.Where(x => x.UserId == userId && x.NoteId == noteId).FirstOrDefault();
                 if (note != null && note.IsTrash == false)
                 {
-                    if (note.IsPin == false)
+                    if (note.IsArchieve == false)
                     {
-                        note.IsPin = true;
+                        note.IsArchieve = true;
                     }
                     else
                     {
-                        note.IsPin = false;
+                        note.IsArchieve = false;
                     }
                 }
                 await this.fundonoteContext.SaveChangesAsync();

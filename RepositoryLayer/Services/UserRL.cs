@@ -45,7 +45,6 @@ namespace RepositoryLayer.Services
             }
         }
 
-
         public List<User> GetAllUsers()
         {
             try
@@ -203,8 +202,7 @@ namespace RepositoryLayer.Services
 
         public bool ResetPassword(string email, PasswordModel modelPassword)
         {
-
-                try
+             try
                 {
                     var user = this.fundonotesContext.Users.Where(x => x.Email == email).FirstOrDefault();
                     if (user == null)

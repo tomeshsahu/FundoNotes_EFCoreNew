@@ -46,7 +46,6 @@ namespace FundoNotesEFCore.Controllers
         {
             try
             {
-
                 List<User> getUsers = new List<User>();
                 getUsers = this.userBL.GetAllUsers();
                 if (getUsers.Count > 0)
